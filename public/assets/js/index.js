@@ -3,10 +3,10 @@ $.get("/api/notes" , function(data) {
   console.log("all note from db",data);
   for(let i =0;i<data.length;i++){
   const title=$("<li>").text(data[i].title);
-  const note=$("<li>").text(data[i].note);
+  // $("<li>").addClass("far fa-trash-alt);
   $(".notes").append(title);
-  $(".notes").append(note);
-  // title.addClass("far fa-trash-alt)
+  // const note=$("<li>").text(data[i].note);
+  // $(".notes").append(note);
 
   }
   
