@@ -3,8 +3,14 @@ $.get("/api/notes" , function(data) {
   console.log("all note from db",data);
   for(let i =0;i<data.length;i++){
   const title=$("<li>").text(data[i].title);
-  // $("<li>").addClass("far fa-trash-alt);
+  title.addClass("list-group-item");
+  const listIcon=$("<span>");
+  listIcon.addClass("far fa-trash-alt");
   $(".notes").append(title);
+  // $(title).siblings(listIcon);
+  $(title).append(listIcon);
+
+ 
   // const note=$("<li>").text(data[i].note);
   // $(".notes").append(note);
 
