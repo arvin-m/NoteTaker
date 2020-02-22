@@ -1,42 +1,42 @@
-//  add new note 
+//  Show the database objects 
+
 $.get("/api/notes" , function(data) {
   console.log("all note from db",data);
   for(let i =0;i<data.length;i++){
-  const title=$("<li>").text(data[i].title);
-  title.addClass("list-group-item");
-  const listIcon=$("<span>");
-  listIcon.addClass("far fa-trash-alt");
-  $(".notes").append(title);
-  // $(title).siblings(listIcon);
-  $(title).append(listIcon);
-
- 
-  // const note=$("<li>").text(data[i].note);
-  // $(".notes").append(note);
-
+    const listItem=$("<li>");
+    listItem.addClass("list-group-item");
+    $(".notes").append(listItem);
+    const title=$("<span>").text(data[i].title);
+    $(listItem).append(title);
+    const listIcon=$("<i>");
+    listIcon.addClass("far fa-trash-alt float-right text-danger");
+    $(listItem).append(listIcon);
   }
+  $(".save-note").hide();
+   
   
-  
-  // const note =$(".note-textarea").val();
-  if (data) {
-    $(".save-note").show();
-    
-    
-  } else {
-  console.log("input cannot be empty !")
-  }
-});
+  });
+
 
 
 // add event listener to the NEW NOTE Btn
 $(".new-note").on("click", function() {
- const newNote ={
-   id:0, //find a way to defined the specific id for each note
-   title:"",
-   note:""
- };
- 
+//  const newNote ={
+//    id:0, 
+//    title:"",
+//    note:""
+//  };
+  const noteTitle = $(".note-title");
+  const noteText = $(".note-textarea");
+  if (!noteTitle.val() || !noteText.val()) {
+    $(".save-note").hide();
+    
+    
+  } else {
+    $(".save-note").show();
 
+}
+ 
 
 });
 
@@ -54,10 +54,28 @@ $(".save-note").on("click", function() {
         
      if (data) {
        
-       console.log(newNote)
+       console.log(newNote);
+       return;
        
      } else {
      console.log("input cannot be empty !")
      }
    });
  });
+
+ $(".far fa-trash-alt").click(function(){
+  // $(this).parent().remove();
+   
+   
+   console.log("item clicked");
+
+ });
+
+// list clecked
+ $(".list-group-item").on("click",function(){
+  
+  console.log("item clicked");
+
+ 
+
+})

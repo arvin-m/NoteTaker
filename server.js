@@ -59,32 +59,34 @@ app.post("/api/notes", (req, res) => {
 // create a route to DELETE data
 app.delete("/api/notes/:id",(req,res)=>{
     const noteBeDelete =req.params.id;
+    console.log(noteBeDelete);
     
     fs.readFile(path.join(__dirname,"/db/db.json"),"utf8",(err, data)=>{
+        if (err) res.json(err);
         const oldDB=JSON.parse(data);
         let newDB;
+        console.log(oldDB);
+        // find how to delet by specific id
+        newDB = oldDB.filter(note => note.id != noteBeDelete);
+        // newDB = oldDB.filter(note => {
+        //     if (note.id === noteBeDelete) {
+        //         return false;
+        //     } else {
+        //         return true;
+        //     }
+        // });
+        console.log(newDB);
 
-    // find how to delet by specific id
-        for(let i =0; i<oldDB.length; i++) {
-        if(oldDB[i].id ==noteBeDelete) {
-             newDB=oldDB.splice(i+1,1);
-          
-        }
-        
-    }
-    fs.writeFile(path.join(__dirname,"/db/db.json"),JSON.stringify(newDB),(err)=>{
-        console.log(err);
-        res.json(newDB);
-    });
-        console.log(newDB)
-        
+        fs.writeFile(path.join(__dirname,"/db/db.json"),JSON.stringify(newDB),(err)=>{
+            if (err) res.json(err);
+            res.json(newDB);
+        });
+            
 
 
     })
     
    
-   
-    
 
 })
 
