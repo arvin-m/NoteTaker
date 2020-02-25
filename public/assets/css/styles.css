@@ -68,4 +68,9 @@ html, body {
   border-right: none;
   padding: 20px;
   cursor: pointer;
+  
+}
+.far{
+  font-size: 45px;
+  /* padding: 20px; */
 }
