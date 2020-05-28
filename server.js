@@ -4,24 +4,10 @@ const path = require("path");
 const app =express();
 const db= require("./db/db.json");
 const PORT=process.env.PORT || 7050;
-
-// const notesArr=[{
-//     id:"1",
-//     title:"arvin",
-//     note:"heloo every one"
-
-// }];
-
 // add the middleware I need to handle POST requests
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname,"public")));
-
-
-
-
-
-
 
 // create a route for note.index file
 app.get("/notes",(req,res)=>{
@@ -41,8 +27,6 @@ app.get("/api/notes",(req,res)=>{
 app.post("/api/notes", (req, res) => {
     //new note object is in req.body
     const newNote = req.body;
-    
-    // console.log(newNote);
     
    fs.readFile(path.join(__dirname,"/db/db.json"),"utf8",(err, data) => {
     const oldDB =JSON.parse(data);
@@ -68,24 +52,11 @@ app.delete("/api/notes/:id",(req,res)=>{
         if (err) res.json(err);
         const oldDB=JSON.parse(data);
         let newDB;
-        // console.log(oldDB);
-        //  delet by specific id
         newDB = oldDB.filter(note => note.id != noteBeDelete);
-        // newDB = oldDB.filter(note => {
-        //     if (note.id === noteBeDelete) {
-        //         return false;
-        //     } else {
-        //         return true;
-        //     }
-        // });
-        // console.log(newDB);
-
         fs.writeFile(path.join(__dirname,"/db/db.json"),JSON.stringify(newDB),(err)=>{
             if (err) res.json(err);
             res.json(newDB);
         });
-            
-
 
     })
 });
@@ -96,5 +67,3 @@ app.get("*",(req,res)=>{
 app.listen(PORT,()=>{
     console.log(` ----->>>>>>> Server Listening on port ${PORT} ! `)
 })
-
-

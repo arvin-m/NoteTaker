@@ -19,6 +19,6 @@ For users that need to keep track of a lot of information, it's easy to forget o
 [Note Taker](https://safe-harbor-35762.herokuapp.com/)
 
 
-### Technology used
+### Built With
 
-HTML,CSS,Boostrap,NODE.js,Express.js
+JavaScript, HTML, CSS, Boostrap, NODE.js, Express.js 
